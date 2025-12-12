@@ -1,0 +1,89 @@
+body {
+    font-family: sans-serif;
+    text-align: center;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+h1 {
+    color: #4a90e2;
+}
+
+.grid-container {
+    display: grid;
+    /* La griglia verrà regolata dallo script, 4 colonne è lo standard */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 10px;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 10px;
+    border: 2px solid #4a90e2;
+    border-radius: 8px;
+    background-color: #fff;
+    /* Aggiunto per stabilizzare l'effetto 3D in alcuni browser */
+    perspective: 1000px; 
+}
+
+.card {
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%; /* Rende l'elemento quadrato */
+    background-color: #ccc;
+    border: 2px solid #333;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.6s;
+    /* Essenziale per l'effetto 3D */
+    transform-style: preserve-3d; 
+}
+
+.card-inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 1.2;
+    font-size: 14px;
+    /* 🛑 CORREZIONE ANTI-SPECCHIO */
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+/* Dorso della carta (non girata) */
+.card-front {
+    background-color: #4a90e2;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* Faccia della carta (girata) */
+.card-back {
+    background-color: #e2f0ff;
+    color: #333;
+    /* Posiziona il testo per la rotazione finale */
+    transform: rotateY(180deg); 
+    border-radius: 5px;
+}
+
+/* Stato: Carta girata o abbinata */
+.card.is-flipped, .card.is-matched {
+    transform: rotateY(180deg);
+}
+
+.card.is-matched .card-front {
+    background-color: #4CAF50; 
+}
+
+/* Stile per le immagini delle ossa (se usate) */
+.card-back img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
